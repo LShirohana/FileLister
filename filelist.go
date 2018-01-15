@@ -14,6 +14,8 @@ func main() {
 	}
 	
 	f, err := os.OpenFile("list.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644) // Open the file if it exists and append, otherwise create.
+	defer f.Close()
+	
 	for _, file := range files { // for-loop the list via range
 		basename := file.Name()
 		name := strings.TrimSuffix(basename, filepath.Ext(basename)) // Get the file names without extension.
@@ -26,7 +28,6 @@ func main() {
 		s := []string{name, "\n"}
 		namedata := strings.Join(s, " ")
 		f.Write([]byte(namedata))
-		f.Close()
 	}
 }
 
