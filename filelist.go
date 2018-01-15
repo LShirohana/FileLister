@@ -13,11 +13,11 @@ func main() {
 		log.Fatal(err)
 	}
 	
+	f, err := os.OpenFile("list.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644) // Open the file if it exists and append, otherwise create.
 	for _, file := range files { // for-loop the list via range
 		basename := file.Name()
 		name := strings.TrimSuffix(basename, filepath.Ext(basename)) // Get the file names without extension.
 		
-		f, err := os.OpenFile("list.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644) // Open the file fi it exists and append, otherwise create.
 		if err != nil {
 			log.Fatal(err)
 		}
